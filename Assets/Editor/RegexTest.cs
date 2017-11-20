@@ -4,8 +4,8 @@ using System.Text.RegularExpressions;
 using NUnit.Framework;
 using UnityEngine;
 
-public class RegexTest {
-
+public class RegexTest
+{
     [Test]
     public void Full()
     {
@@ -29,10 +29,20 @@ public class RegexTest {
     }
 
     [Test]
-    public void None()
+    public void Tail()
     {
         string source = "1234567890";
         int index = 4;
+        var regex = new Regex("[34]+");
+        var match = regex.Match(source, index, source.Length - index);
+        Assert.IsFalse(match.Success);
+    }
+
+    [Test]
+    public void None()
+    {
+        string source = "1234567890";
+        int index = source.Length - 1;
         var regex = new Regex("[34]+");
         var match = regex.Match(source, index, source.Length - index);
         Assert.IsFalse(match.Success);
